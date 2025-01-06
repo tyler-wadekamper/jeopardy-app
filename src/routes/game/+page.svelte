@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  
+  import { playerName, playerScore } from '$lib/stores';
   export let data: PageData;
 </script>
 
@@ -11,14 +11,21 @@
         <h2>{category.category}</h2>
       </div>
       {#if category.questions}
-        {#each category.questions as question}
+        {#each category.questions as question, index}
           <div class="question-tile">
-            <p>{question.clue}</p>
+            {question.value = (index + 1) * 200}
+            <p>${question.value}</p>
+            <!-- <p>{question.clue}</p> -->
           </div>
         {/each}
       {/if}
     </div>
   {/each}
+</div>
+
+<div class="player-info">
+  <p>Player: {$playerName}</p>
+  <p>Score: ${$playerScore}</p>
 </div>
 
 <style>
@@ -56,12 +63,12 @@
   }
 
   h2 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0;
   }
 
   p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 2rem;
   }
 </style>
